@@ -1,13 +1,11 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './App.module.css'
 import Metronome from './components/metronome'
-
-let intervalId: NodeJS.Timer | null = null
-let number = 0
+import SynthModule from './services/synth'
 
 function App() {
+  const [userResponded, setUserResponded] = useState(false)
   const [bpm, setBpm] = useState('120')
-  const [isYellow, setIsYellow] = useState(true)
   const metronomeRef = useRef<HTMLDivElement>(null)
   const bpmInputRef = useRef<HTMLInputElement>(null)
   const [metronomeKey, setMetronomeKey] = useState(0)
@@ -16,15 +14,29 @@ function App() {
     const inputValue = bpmInputRef.current?.value
     if (inputValue && metronomeRef?.current) {
       setBpm(inputValue)
-      if (intervalId) {
-        clearInterval(intervalId)
-      }
-      intervalId = setInterval(
-        () => setIsYellow((prev) => !prev),
-        (60 / parseInt(inputValue)) * 1000
-      )
-      setMetronomeKey((prev) => prev + 1)
+      SynthModule.Tone.Transport.stop()
+      
+      SynthModule.Tone.Transport.bpm.value = parseInt(inputValue)
+      SynthModule.Tone.Transport.start("+1")
+      setTimeout(() => {
+        setMetronomeKey((prev) => prev + 1)
+      }, 1000);
     }
+  }
+
+  const handlePlay = () => {
+    SynthModule.Tone.start().then(() => {
+      SynthModule.run()
+      setUserResponded(true)
+    })
+  }
+
+  if (!userResponded) {
+    return (
+      <div className={styles.container}>
+        <button onClick={handlePlay}>Play</button>
+      </div>
+    )
   }
 
   return (
@@ -35,14 +47,6 @@ function App() {
         bpm={parseInt(bpm || '1')}
         ref={metronomeRef}
         key={metronomeKey}
-      />
-
-      <div
-        style={{
-          width: 100,
-          height: 100,
-          backgroundColor: isYellow ? 'yellow' : 'red',
-        }}
       />
     </div>
   )
