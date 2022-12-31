@@ -1,0 +1,38 @@
+
+.playButton {
+  position: relative;
+  background-color: lightblue;
+  border: none;
+  font-size: 28px;
+  color: black;
+  font-weight: 600;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  margin: 30px 0;
+}
+
+.playButton:after {
+  content: "";
+  background: slategrey;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.playButton:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}

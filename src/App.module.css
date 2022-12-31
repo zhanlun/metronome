@@ -8,3 +8,11 @@
   gap: 20px;
   align-items: center;
 }
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  flex-grow: 1;
+}

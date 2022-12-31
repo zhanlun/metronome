@@ -19,7 +19,7 @@ const Metronome = React.forwardRef<HTMLDivElement, Props>(
     const midY = height / 2
 
     return (
-      <div ref={ref} style={{ width, height, position: 'relative' }}>
+      <div ref={ref} style={{ width, height, position: 'relative', marginTop: 30 }}>
         <svg
           height={height}
           width={width}

@@ -1,8 +1,13 @@
 import * as Tone from 'tone'
-const synth = new Tone.Synth().toDestination();
+const synth = new Tone.Sampler({
+  urls: {
+    'C4': 'metronome-click.mp3',
+  },
+  baseUrl: '/',
+}).toDestination();
 
 const loopA = new Tone.Loop(time => {
-  synth.triggerAttackRelease("C5", "32n", time);
+  synth.triggerAttackRelease("C4", 0.5);
 }, "4n").start(0);
 
 async function run() {
