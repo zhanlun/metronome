@@ -50,6 +50,7 @@ function App() {
       applyBPM()
     } else {
       SynthModule.Tone.Transport.stop()
+      setMetronomeDisplayBpm('0.000001')
     }
   }, [isPlaying])
 
