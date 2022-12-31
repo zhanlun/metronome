@@ -1,9 +1,8 @@
 # Metronome
 
-A simple metronome app for fun
+A simple metronome app for fun. Check out the demo app at: https://zhanlun-metronome.netlify.app/
 
-## Todo
-
-- Basic layout
-- Metronome UI (SVG)
-
+## Current Features
+- Metronome click sound
+- Metronome animation (SVG + CSS)
+- Play/pause
